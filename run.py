@@ -4,7 +4,8 @@ import requests
 import json
 import logging
 from datetime import datetime, timezone, timedelta
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 def ssh_multiple_connections(hosts_info, command):
     users = []
     hostnames = []
@@ -56,7 +57,7 @@ def post_weichat_2():
         'token': token,  # 使用环境变量中的token值
         'title': 'serv00保活签到',
         'template': 'txt',
-        'content': content  # 确保msg变量在此处之前已经被定义
+        'content': content  # 确保变量在此处之前已经被定义
     }
     r = requests.post(url, data=data_dict)  # 发起请求
     print(r.text)
