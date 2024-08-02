@@ -2,7 +2,7 @@ name: SSH Login
 
 on:
   schedule:
-    - cron: '0 11 5 * *'  # 每月的 5号 北京时间 19 点运行
+    - cron: '0 0 1,6,11,16,21,26,31 * *'  # 每个月的第1天、第6天、第11天等以此类推，每隔5天运行一次
   workflow_dispatch:
 
 jobs:
