@@ -42,24 +42,27 @@ time = datetime.now(beijing_timezone).strftime('%Y-%m-%d %H:%M:%S')
 loginip = requests.get('https://api.ipify.org?format=json').json()['ip']
 content += f"本次登录用户共： {user_num} 个\n登录时间：{time}\n登录IP：{loginip}"
 
-push = os.getenv('PUSH')
 
 def post_weichat_2():
-    url = 'http://www.pushplus.plus/send'
-    # 从环境变量中获取token
-    token = os.getenv('PUSHPLUS_TOKEN')
-    if not token:
-        logger.error("PUSHPLUS_TOKEN is not set.")
+    token = os.getenv('AnPush_TOKEN')
+     if not token:
+        logger.error("AnPush_TOKEN is not set.")
         return
 
+    url = "https://api.anpush.com/push/"+token
+    # 从环境变量中获取token
+    
+   
     # post发送的字典参数
     data_dict = {
-        'token': token,  # 使用环境变量中的token值
         'title': 'serv00保活签到',
-        'template': 'txt',
-        'content': content  # 确保变量在此处之前已经被定义
+        'content': content,  # 确保变量在此处之前已经被定义
+        "channel": "56466"
     }
-    r = requests.post(url, data=data_dict)  # 发起请求
+    headers = {
+    "Content-Type": "application/x-www-form-urlencoded"
+    }
+    r = requests.post(url, headers=headers, data=data_dict)  # 发起请求
     print(r.text)
     logger.info("推送状态: %s", r.text)
 
