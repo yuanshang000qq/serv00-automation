@@ -44,9 +44,9 @@ content += f"本次登录用户共： {user_num} 个\n登录时间：{time}\n登
 
 
 def post_weichat_2():
-    token = os.getenv('AnPush_TOKEN')
+    token = os.getenv('ANPUSH_TOKEN')
      if not token:
-        logger.error("AnPush_TOKEN is not set.")
+        logger.error("ANPUSH_TOKEN is not set.")
         return
 
     url = "https://api.anpush.com/push/"+token
