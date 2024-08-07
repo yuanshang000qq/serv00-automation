@@ -91,7 +91,6 @@ def send_webhook(content):
 
 
 # 使用函数示例
-content = "这里是你想要发送的消息内容"
 result = send_webhook(content)
 print(result)
 logger.info("推送状态: %s", result)
